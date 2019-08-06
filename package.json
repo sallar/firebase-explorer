@@ -1,0 +1,26 @@
+{
+  "name": "firebase-explorer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "start": "npm run build && electron ./dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sallar/firebase-explorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sallar/firebase-explorer/issues"
+  },
+  "homepage": "https://github.com/sallar/firebase-explorer#readme",
+  "devDependencies": {
+    "electron": "^6.0.0",
+    "typescript": "^3.5.3"
+  }
+}
