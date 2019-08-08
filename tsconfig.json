@@ -3,6 +3,8 @@
     "jsx": "react",
     "module": "commonjs",
     "esModuleInterop": true,
+    "types": ["node"],
+    "lib": ["dom", "es2015"],
     "strict": true,
     "sourceMap": true,
     "outDir": "dist"

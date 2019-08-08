@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { AppContext } from "./Context";
 import Navbar from "./Navbar";
+import { Column, Columns } from "./Columns";
 
 const GlobalStyles = createGlobalStyle`
   body, html {
@@ -23,17 +24,6 @@ const Wrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: 40px 1fr;
-`;
-
-const Columns = styled.div`
-  display: flex;
-  height: 100%;
-  overflow-x: scroll;
-`;
-
-const Column = styled.div`
-  border-right: 1px solid red;
-  flex: 0 0 200px;
 `;
 
 const makePath = (parts: string[], stopIndex: number): string => {
