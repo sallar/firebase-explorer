@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import { AppContext } from "./Context";
 
 const Input = styled.input`
   height: 40px;
@@ -9,22 +10,17 @@ const Input = styled.input`
   border-radius: 5px;
 `;
 
-interface NavbarProps {
-  path: string;
-  onChangePath(path: string): any;
-}
 
-const Navbar: React.FunctionComponent<NavbarProps> = ({
-  path,
-  onChangePath
-}) => {
+const Navbar: React.FunctionComponent = () => {
+  const { onSelectPath, path } = useContext(AppContext);
   const [currentPath, setCurrentPath] = useState(path);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentPath(e.target.value);
   };
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      onChangePath(currentPath);
+      onSelectPath(currentPath);
     }
   };
   const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {

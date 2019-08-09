@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "./Context";
 
-interface RootListProps {
-  onSelectPath(path: string): any;
-}
 
-const RootList: React.FunctionComponent<RootListProps> = ({ onSelectPath }) => {
+const RootList: React.FunctionComponent = () => {
   const [data, setData] = useState<any[]>([]);
+  const { onSelectPath } = useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {

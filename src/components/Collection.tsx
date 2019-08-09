@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "./Context";
 
 interface CollectionProps {
   path: string;
-  onSelectPath(path: string): any;
 }
 
 const Collection: React.FunctionComponent<CollectionProps> = ({
-  path,
-  onSelectPath
+  path
 }) => {
   const [data, setData] = useState<any[]>([]);
+  const { onSelectPath } = useContext(AppContext);
 
   useEffect(() => {
     const getData = async () => {

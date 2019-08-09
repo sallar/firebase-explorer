@@ -67,19 +67,19 @@ const App: React.FunctionComponent = ({}) => {
   return (
     <Wrapper>
       <GlobalStyles />
-      <AppContext.Provider value={{ path }}>
-        <Navbar onChangePath={setPath} path={path} />
+      <AppContext.Provider value={{ path, onSelectPath }}>
+        <Navbar />
         <Columns>
           <Column>
-            <RootList onSelectPath={onSelectPath} />
+            <RootList />
           </Column>
           {parts.map(part => (
             <Column key={part.path}>
               {part.type === "collection" && (
-                <Collection path={part.path} onSelectPath={onSelectPath} />
+                <Collection path={part.path} />
               )}
               {part.type === "document" && (
-                <Document path={part.path} onSelectPath={onSelectPath} />
+                <Document path={part.path} />
               )}
             </Column>
           ))}
