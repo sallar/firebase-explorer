@@ -2,13 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <title>Firestore Explorer</title>
   </head>
   <body>
     <div id="root"></div>
   </body>
 
-  <script>
-    require("./dist/renderer.js");
-  </script>
+  <script src="./dist/renderer.js"></script>
 </html>

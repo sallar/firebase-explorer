@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc -w",
+    "build": "webpack --config webpack.config.js",
+    "build:watch": "webpack --watch --config webpack.config.js",
     "start": "npm run build && electron ./dist/main.js"
   },
   "repository": {
@@ -25,10 +25,14 @@
     "@types/react-dom": "^16.8.5",
     "@types/styled-components": "^4.1.18",
     "electron": "^6.0.0",
+    "electron-better-ipc": "^0.3.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.2",
-    "typescript": "^3.5.3"
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
   },
   "dependencies": {
     "firebase-admin": "^8.3.0"

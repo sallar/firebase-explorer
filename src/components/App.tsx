@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { AppContext } from "./Context";
 import Navbar from "./Navbar";
 import { Column, Columns } from "./Columns";
+import Collection from "./Collection";
 
 const GlobalStyles = createGlobalStyle`
   body, html {
@@ -65,9 +66,8 @@ const App: React.FunctionComponent = ({}) => {
           <Column>Root</Column>
           {parts.map(part => (
             <Column key={part.path}>
-              {part.type}
-              <br />
-              {part.path}
+              {part.type === "collection" && <Collection path={part.path} />}
+              {part.type === "document" && <h6>Shit</h6>}
             </Column>
           ))}
         </Columns>
