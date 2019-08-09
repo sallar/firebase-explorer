@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 
 interface DocumentProps {
   path: string;
+  onSelectPath(path: string): any;
 }
 
-const Document: React.FunctionComponent<DocumentProps> = ({ path }) => {
+const Document: React.FunctionComponent<DocumentProps> = ({
+  path,
+  onSelectPath
+}) => {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
@@ -15,10 +19,20 @@ const Document: React.FunctionComponent<DocumentProps> = ({ path }) => {
     };
     getData();
   }, [path]);
+  if (!data) {
+    return null;
+  }
   return (
-    <pre>
-      {JSON.stringify(data, undefined, 2)}
-    </pre>
+    <>
+      <ul>
+        {data.collections.map((col: any) => (
+          <li key={col.id} onClick={() => onSelectPath(col.path)}>
+            {col.id}
+          </li>
+        ))}
+      </ul>
+      <pre>{JSON.stringify(data.data, undefined, 2)}</pre>
+    </>
   );
 };
 

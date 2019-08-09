@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -30,6 +30,13 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({
   const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     e.target.select();
   };
+
+  useEffect(() => {
+    if (path !== currentPath) {
+      setCurrentPath(path);
+    }
+  }, [path]);
+
   return (
     <Input
       type="text"

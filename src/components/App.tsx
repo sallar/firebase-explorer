@@ -39,10 +39,14 @@ const makePath = (parts: string[], stopIndex: number): string => {
   return path.replace(/^\//, "");
 };
 
-const parsePath = (path: string): Array<{ path: string; type: string }> => {
+const sanitizePath = (path: string): string => {
   path = path.endsWith("/") ? path.replace(/\/$/, "") : path;
   path = path.startsWith("/") ? path : `/${path}`;
-  const [, ...parts] = path.split("/");
+  return path;
+};
+
+const parsePath = (path: string): Array<{ path: string; type: string }> => {
+  const [, ...parts] = sanitizePath(path).split("/");
 
   if (parts.length === 1 && parts[0] === "") {
     return [];
@@ -58,6 +62,7 @@ const App: React.FunctionComponent = ({}) => {
   const [path, setPath] = useState("/users/HERO");
 
   const parts = parsePath(path);
+  const onSelectPath = (newPath: string) => setPath(sanitizePath(newPath));
 
   return (
     <Wrapper>
@@ -65,11 +70,17 @@ const App: React.FunctionComponent = ({}) => {
       <AppContext.Provider value={{ path }}>
         <Navbar onChangePath={setPath} path={path} />
         <Columns>
-          <Column><RootList /></Column>
+          <Column>
+            <RootList onSelectPath={onSelectPath} />
+          </Column>
           {parts.map(part => (
             <Column key={part.path}>
-              {part.type === "collection" && <Collection path={part.path} />}
-              {part.type === "document" && <Document path={part.path}>Shit</Document>}
+              {part.type === "collection" && (
+                <Collection path={part.path} onSelectPath={onSelectPath} />
+              )}
+              {part.type === "document" && (
+                <Document path={part.path} onSelectPath={onSelectPath} />
+              )}
             </Column>
           ))}
         </Columns>

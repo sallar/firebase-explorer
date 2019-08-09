@@ -51,7 +51,7 @@ ipc.answerRenderer("get-collection", async (path: any) => {
     .firestore()
     .collection(path)
     .get();
-  return docs.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+  return docs.docs.map(doc => ({ id: doc.id, path: doc.ref.path }));
 });
 
 ipc.answerRenderer("get-document", async (path: any) => {
