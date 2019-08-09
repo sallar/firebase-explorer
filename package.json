@@ -25,7 +25,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/styled-components": "^4.1.18",
     "electron": "^6.0.0",
-    "electron-better-ipc": "^0.3.0",
+    "electron-better-ipc": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "styled-components": "^4.3.2",

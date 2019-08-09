@@ -4,6 +4,8 @@ import { AppContext } from "./Context";
 import Navbar from "./Navbar";
 import { Column, Columns } from "./Columns";
 import Collection from "./Collection";
+import Document from "./Document";
+import RootList from "./Root";
 
 const GlobalStyles = createGlobalStyle`
   body, html {
@@ -53,7 +55,7 @@ const parsePath = (path: string): Array<{ path: string; type: string }> => {
 };
 
 const App: React.FunctionComponent = ({}) => {
-  const [path, setPath] = useState("/users/id/collection/someid");
+  const [path, setPath] = useState("/users/HERO");
 
   const parts = parsePath(path);
 
@@ -63,11 +65,11 @@ const App: React.FunctionComponent = ({}) => {
       <AppContext.Provider value={{ path }}>
         <Navbar onChangePath={setPath} path={path} />
         <Columns>
-          <Column>Root</Column>
+          <Column><RootList /></Column>
           {parts.map(part => (
             <Column key={part.path}>
               {part.type === "collection" && <Collection path={part.path} />}
-              {part.type === "document" && <h6>Shit</h6>}
+              {part.type === "document" && <Document path={part.path}>Shit</Document>}
             </Column>
           ))}
         </Columns>

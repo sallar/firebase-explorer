@@ -8,5 +8,6 @@ export const Columns = styled.div`
 
 export const Column = styled.div`
   border-right: 1px solid red;
-  flex: 0 0 200px;
+  flex: 0 0 250px;
+  overflow-y: auto;
 `;

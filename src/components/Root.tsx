@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-interface CollectionProps {
-  path: string;
-}
 
-const Collection: React.FunctionComponent<CollectionProps> = ({ path }) => {
+const RootList: React.FunctionComponent = () => {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       // @ts-ignore
-      const col = await window.getCollection(path);
-      setData(col);
+      const cols = await window.getRoot();
+      setData(cols);
     };
     getData();
-  }, [path]);
+  }, []);
   return (
     <ul>
       {data.map(item => (
@@ -24,4 +21,4 @@ const Collection: React.FunctionComponent<CollectionProps> = ({ path }) => {
   );
 };
 
-export default Collection;
+export default RootList;
