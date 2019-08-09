@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
+// @ts-ignore
+import { JsonEditor as Editor } from "jsoneditor-react";
 import { AppContext } from "./Context";
+import 'jsoneditor-react/es/editor.min.css';
 
 interface DocumentProps {
   path: string;
 }
 
-const Document: React.FunctionComponent<DocumentProps> = ({
-  path
-}) => {
+const Document: React.FunctionComponent<DocumentProps> = ({ path }) => {
   const [data, setData] = useState<any>(null);
   const { onSelectPath } = useContext(AppContext);
 
@@ -24,6 +25,14 @@ const Document: React.FunctionComponent<DocumentProps> = ({
   }
   return (
     <>
+      <Editor
+        value={data.data}
+        mode="view"
+        allowedModes={['tree', 'form']}
+        onChange={(...args: any) => {
+          console.log("bing", args);
+        }}
+      />
       <ul>
         {data.collections.map((col: any) => (
           <li key={col.id} onClick={() => onSelectPath(col.path)}>
@@ -31,7 +40,6 @@ const Document: React.FunctionComponent<DocumentProps> = ({
           </li>
         ))}
       </ul>
-      <pre>{JSON.stringify(data.data, undefined, 2)}</pre>
     </>
   );
 };
