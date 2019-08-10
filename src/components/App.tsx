@@ -3,9 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { AppContext } from "./Context";
 import Navbar from "./Navbar";
 import { Column, Columns } from "./Columns";
-import Collection from "./Collection";
-import Document from "./Document";
-import RootList from "./Root";
+import DataContainer from "./DataContainer";
 
 const GlobalStyles = createGlobalStyle`
   body, html {
@@ -52,7 +50,7 @@ const parsePath = (path: string): Array<{ path: string; type: string }> => {
     return [];
   }
 
-  return parts.map((part, index) => ({
+  return parts.map((_, index) => ({
     path: makePath(parts, index),
     type: index % 2 === 0 ? "collection" : "document"
   }));
@@ -71,16 +69,11 @@ const App: React.FunctionComponent = ({}) => {
         <Navbar />
         <Columns>
           <Column>
-            <RootList />
+            <DataContainer path="/" type="root" />
           </Column>
           {parts.map(part => (
             <Column key={part.path}>
-              {part.type === "collection" && (
-                <Collection path={part.path} />
-              )}
-              {part.type === "document" && (
-                <Document path={part.path} />
-              )}
+              <DataContainer path={part.path} type={part.type} />
             </Column>
           ))}
         </Columns>
