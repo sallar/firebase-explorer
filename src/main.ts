@@ -2,6 +2,7 @@ import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import admin from "./utils/firebase";
 import { firestore } from "firebase-admin";
+import { normalizePath, denormalizePath } from "./utils/path";
 
 const ipc = require("electron-better-ipc");
 
@@ -42,20 +43,23 @@ ipc.answerRenderer("get-root", async () => {
   const docs = await admin.firestore().listCollections();
   return docs.map(col => ({
     id: col.id,
-    path: col.path
+    path: normalizePath(col.path)
   }));
 });
 
 ipc.answerRenderer("get-collection", async (path: any) => {
   const docs = await admin
     .firestore()
-    .collection(path)
+    .collection(denormalizePath(path))
     .get();
-  return docs.docs.map(doc => ({ id: doc.id, path: doc.ref.path }));
+  return docs.docs.map(doc => ({
+    id: doc.id,
+    path: normalizePath(doc.ref.path)
+  }));
 });
 
 ipc.answerRenderer("get-document", async (path: any) => {
-  const docRef = admin.firestore().doc(path);
+  const docRef = admin.firestore().doc(denormalizePath(path));
   const docData = await docRef.get();
   const docCollections = await docRef.listCollections();
 
@@ -63,7 +67,7 @@ ipc.answerRenderer("get-document", async (path: any) => {
     data: docData.data(),
     collections: docCollections.map(col => ({
       id: col.id,
-      path: col.path
+      path: normalizePath(col.path)
     }))
   };
 });
