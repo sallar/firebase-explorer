@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "./Context";
 import { Document } from "./Document";
+import { normalizePath } from "../utils/path";
 
 interface DocumentListProps {
   documents: Document[];
@@ -11,7 +12,7 @@ const DocumentList: React.FunctionComponent<DocumentListProps> = ({
   documents,
   currentId
 }) => {
-  const { onSelectPath } = useContext(AppContext);
+  const { onSelectPath, path } = useContext(AppContext);
 
   return (
     <ul>
