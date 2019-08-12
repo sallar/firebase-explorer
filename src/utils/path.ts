@@ -28,6 +28,7 @@ export const parsePath = (
 
   return parts.map((_, index) => ({
     path: makePath(parts, index),
+    currentId: parts.length >= index ? parts[index + 1] : null,
     type: index % 2 === 0 ? "collection" : "document"
   }));
 };
