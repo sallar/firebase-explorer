@@ -1,3 +1,4 @@
+import "typeface-roboto";
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { AppContext } from "./Context";
@@ -40,9 +41,6 @@ const App: React.FunctionComponent = ({}) => {
       <AppContext.Provider value={{ path, onSelectPath }}>
         <Navbar />
         <Columns>
-          <Column>
-            <DataContainer path="/" type="root" currentId={null} />
-          </Column>
           {parts.map(part => (
             <Column key={part.path}>
               <DataContainer

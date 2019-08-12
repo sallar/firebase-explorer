@@ -14,7 +14,7 @@ const sharedConfig = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(png|jpg|gif|svg)$/i,
+        test: /\.(png|jpg|gif|svg|woff|woff2)$/i,
         use: [
           {
             loader: "file-loader",
