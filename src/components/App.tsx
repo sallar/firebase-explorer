@@ -43,7 +43,9 @@ const sanitizePath = (path: string): string => {
   return path;
 };
 
-const parsePath = (path: string): Array<{ path: string; type: string }> => {
+const parsePath = (
+  path: string
+): Array<{ path: string; type: string; currentId: string | null }> => {
   const [, ...parts] = sanitizePath(path).split("/");
 
   if (parts.length === 1 && parts[0] === "") {
@@ -52,6 +54,7 @@ const parsePath = (path: string): Array<{ path: string; type: string }> => {
 
   return parts.map((_, index) => ({
     path: makePath(parts, index),
+    currentId: parts.length >= index ? parts[index + 1] : null,
     type: index % 2 === 0 ? "collection" : "document"
   }));
 };
@@ -69,11 +72,15 @@ const App: React.FunctionComponent = ({}) => {
         <Navbar />
         <Columns>
           <Column>
-            <DataContainer path="/" type="root" />
+            <DataContainer path="/" type="root" currentId={null} />
           </Column>
           {parts.map(part => (
             <Column key={part.path}>
-              <DataContainer path={part.path} type={part.type} />
+              <DataContainer
+                path={part.path}
+                type={part.type}
+                currentId={part.currentId}
+              />
             </Column>
           ))}
         </Columns>
