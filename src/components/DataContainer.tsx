@@ -21,11 +21,13 @@ enum DataType {
 interface DocumentProps {
   path: string;
   type: DataType | string;
+  currentId: string | null;
 }
 
 const DataContainer: React.FunctionComponent<DocumentProps> = ({
   path,
-  type
+  type,
+  currentId
 }) => {
   const [data, setData] = useState<any>(null);
   const mountRef = useRef(true);
@@ -61,9 +63,15 @@ const DataContainer: React.FunctionComponent<DocumentProps> = ({
 
   return (
     <>
-      {type === DataType.Document && <DocumentView document={data} />}
-      {type === DataType.Collection && <DocumentList documents={data} />}
-      {type === DataType.Root && <CollectionList collections={data} />}
+      {type === DataType.Document && (
+        <DocumentView document={data} currentId={currentId} />
+      )}
+      {type === DataType.Collection && (
+        <DocumentList documents={data} currentId={currentId} />
+      )}
+      {type === DataType.Root && (
+        <CollectionList collections={data} currentId={currentId} />
+      )}
     </>
   );
 };

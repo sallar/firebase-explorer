@@ -41,11 +41,15 @@ const App: React.FunctionComponent = ({}) => {
         <Navbar />
         <Columns>
           <Column>
-            <DataContainer path="/" type="root" />
+            <DataContainer path="/" type="root" currentId={null} />
           </Column>
           {parts.map(part => (
             <Column key={part.path}>
-              <DataContainer path={part.path} type={part.type} />
+              <DataContainer
+                path={part.path}
+                type={part.type}
+                currentId={part.currentId}
+              />
             </Column>
           ))}
         </Columns>

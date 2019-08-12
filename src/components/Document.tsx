@@ -16,10 +16,12 @@ interface DocumentData {
 
 interface DocumentViewProps {
   document: DocumentData;
+  currentId: string | null;
 }
 
 const DocumentView: React.FunctionComponent<DocumentViewProps> = ({
-  document
+  document,
+  currentId
 }) => {
   return (
     <>
@@ -31,7 +33,10 @@ const DocumentView: React.FunctionComponent<DocumentViewProps> = ({
           console.log("bing", args);
         }}
       />
-      <CollectionList collections={document.collections} />
+      <CollectionList
+        collections={document.collections}
+        currentId={currentId}
+      />
     </>
   );
 };

@@ -5,10 +5,12 @@ import { normalizePath } from "../utils/path";
 
 interface DocumentListProps {
   documents: Document[];
+  currentId: string | null;
 }
 
 const DocumentList: React.FunctionComponent<DocumentListProps> = ({
-  documents
+  documents,
+  currentId
 }) => {
   const { onSelectPath, path } = useContext(AppContext);
 
@@ -18,9 +20,7 @@ const DocumentList: React.FunctionComponent<DocumentListProps> = ({
         <li
           key={item.id}
           onClick={() => onSelectPath(item.path)}
-          style={{
-            fontWeight: item.path === path ? "bold" : "normal"
-          }}
+          style={{ fontWeight: item.id === currentId ? "bold" : "normal" }}
         >
           {item.id}
         </li>
