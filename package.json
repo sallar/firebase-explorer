@@ -30,7 +30,7 @@
     "electron": "^6.0.0",
     "electron-better-ipc": "^0.2.0",
     "file-loader": "^4.2.0",
-    "jsoneditor": "^6.2.1",
+    "jsoneditor": "^9.5.6",
     "jsoneditor-react": "^1.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
